@@ -9,11 +9,22 @@ const AddAppointment = () => {
     const [time, saveTime] = useState('');
     const [symptom, saveSymptom] = useState('');
 
+    // when the form is send
+    const submitNewAppointment = e => {
+        e.preventDefault();
+
+        // validate the form
+
+        // create the new appointment
+
+        // store in the state and restart the form
+    }
+
     return (
         <div className="card mt-5">
             <div className="card-body">
                 <h2 className="card-title text-center mb-5">Add appointments here</h2>
-                <form>
+                <form onSubmit={submitNewAppointment}>
                     <div className="form-group row">
                         <label className="col-sm-4 col-lg-2 col-form-label">Pet Name</label>
                         <div className="col-sm-8 col-lg-10">
