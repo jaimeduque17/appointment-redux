@@ -1,5 +1,6 @@
 import React from 'react';
 import AddAppointment from './components/AddAppointment';
+import ListAppointments from './components/ListAppointments';
 
 // Redux
 import store from './store';
@@ -17,7 +18,7 @@ function App() {
             <AddAppointment />
           </div>
           <div className="col-md-6">
-            List here
+            <ListAppointments />
         </div>
         </div>
       </div>
