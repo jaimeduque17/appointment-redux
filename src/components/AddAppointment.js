@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {addAppointmentAction} from '../actions/appointmentActions';
+import uuid from 'uuid/v4';
 
 const AddAppointment = () => {
 
@@ -9,6 +12,10 @@ const AddAppointment = () => {
     const [time, saveTime] = useState('');
     const [symptom, saveSymptom] = useState('');
 
+    // dispatch for execute the actions
+    const dispatch = useDispatch();
+    const addNewAppointment = (appointment) => dispatch(addAppointmentAction(appointment));
+
     // when the form is send
     const submitNewAppointment = e => {
         e.preventDefault();
@@ -16,8 +23,21 @@ const AddAppointment = () => {
         // validate the form
 
         // create the new appointment
+        addNewAppointment({
+            id: uuid(),
+            pet,
+            owner,
+            date,
+            time,
+            symptom
+        })
 
         // store in the state and restart the form
+        savePet('');
+        saveOwner('');
+        saveDate('');
+        saveTime('');
+        saveSymptom('');
     }
 
     return (
