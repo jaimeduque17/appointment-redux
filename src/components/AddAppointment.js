@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {addAppointmentAction} from '../actions/appointmentActions';
+import { addAppointmentAction } from '../actions/appointmentActions';
+import { validateFormAction } from '../actions/validateActions';
 import uuid from 'uuid/v4';
 
 const AddAppointment = () => {
@@ -15,12 +16,20 @@ const AddAppointment = () => {
     // dispatch for execute the actions
     const dispatch = useDispatch();
     const addNewAppointment = (appointment) => dispatch(addAppointmentAction(appointment));
+    const validateForm = (state) => dispatch(validateFormAction(state));
 
     // when the form is send
     const submitNewAppointment = e => {
         e.preventDefault();
 
         // validate the form
+        // trim delete the empty spaces
+        if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || symptom.trim() === '' ) {
+            validateForm(true);
+            return;
+        }
+
+        validateForm(false);
 
         // create the new appointment
         addNewAppointment({
