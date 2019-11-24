@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addAppointmentAction } from '../actions/appointmentActions';
 import { validateFormAction } from '../actions/validateActions';
 import uuid from 'uuid/v4';
@@ -18,13 +18,18 @@ const AddAppointment = () => {
     const addNewAppointment = (appointment) => dispatch(addAppointmentAction(appointment));
     const validateForm = (state) => dispatch(validateFormAction(state));
 
+    // useSelector is equivalent to mapStateToProps in Hooks
+    const error = useSelector((state) => state.error);
+
+    console.log(error);
+
     // when the form is send
     const submitNewAppointment = e => {
         e.preventDefault();
 
         // validate the form
         // trim delete the empty spaces
-        if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || symptom.trim() === '' ) {
+        if (pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || symptom.trim() === '') {
             validateForm(true);
             return;
         }
@@ -114,6 +119,7 @@ const AddAppointment = () => {
                         </div>
                     </div>
                 </form>
+                {error.error ? <div className="alert alert-danger text-center p2">All fields are required</div> : null}
             </div>
         </div>
     );
