@@ -4,3 +4,10 @@ export const addAppointmentAction = appointment => {
         payload: appointment
     }
 }
+
+export const deleteAppointmentAction = id => {
+    return {
+        type: 'DELETE_APPOINTMENT',
+        payload: id
+    }
+}
